@@ -10,8 +10,8 @@ export class FibonacciController {
   constructor(private readonly fibonacciService: FibonacciService) {}
 
   @MessagePattern({ cmd: 'calc_fibonacci' })
-  async getHello(@Payload() index: string): Promise<number> {
+  async getHello(@Payload() index: string): Promise<any> {
     const result = await this.fibonacciService.calcFibonacci(Number(index));
-    return result;
+    return result + " updated!";
   }
 }
