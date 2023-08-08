@@ -51,6 +51,6 @@ jobs:
 
       - name: Apply
         run: |-
-          kubectl apply -f deployments
+          kubectl apply -f fibonacci-config.yml
           kubectl set image deployments/fibonacci-deployment fibonacci=makarovvv/fibonacci:${{ env.SHA }}
 

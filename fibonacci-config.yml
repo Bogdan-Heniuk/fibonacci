@@ -1,22 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gateway-deployment
+  name: fibonacci-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      component: gateway
+      component: fibonacci
   template:
     metadata:
       labels:
-        component: gateway
+        component: fibonacci
     spec:
       containers:
-        - name: gateway
-          image: makarovvv/gateway
+        - name: fibonacci
+          image: makarovvv/fibonacci
+          imagePullPolicy: Never
           ports:
-            - containerPort: 3000
+            - containerPort: 6000
           env:
             - name: RMQ_URL
               value: amqp://rabbitmq-cluster-ip-service
@@ -24,16 +25,3 @@ spec:
               value: fibonacci_queue
             - name: RMQ_FACTORIAL_QUEUE
               value: factorial_queue
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: gateway-cluster-ip-service
-spec:
-  type: ClusterIP
-  selector:
-    component: gateway
-  ports:
-    - port: 3000
-      targetPort: 3000
