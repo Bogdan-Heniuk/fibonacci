@@ -3,16 +3,10 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class FibonacciService {
   calcFibonacci(index: number): number {
-    let a = 0,
-      b = 1,
-      c = index;
-
-    for (let i = 2; i <= index; i++) {
-      c = a + b;
-      a = b;
-      b = c;
+    if (index < 2) {
+      return index;
     }
 
-    return c;
+    return this.calcFibonacci(index - 1) + this.calcFibonacci(index - 2);
   }
 }
